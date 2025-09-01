@@ -7,7 +7,7 @@ class ProgramSchema(BaseModel):
     name: str
     is_default: bool
     
-    user: UserResponseSchema
+    user: Optional[UserResponseSchema] = None
     
     class Config:
         orm_mode = True

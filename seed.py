@@ -1,10 +1,15 @@
 # seed.py
 
 from sqlalchemy.orm import sessionmaker, Session
-from data.user_data import user_list
-from config.environment import db_URI
 from sqlalchemy import create_engine
+from config.environment import db_URI
 from models.base import Base
+# Import all models first to ensure they're registered
+from models.user import UserModel
+from models.program import ProgramModel
+# Then import the data
+from data.user_data import user_list
+from data.program_data import program_list
 
 engine = create_engine(db_URI)
 SessionLocal = sessionmaker(bind=engine)
@@ -20,12 +25,16 @@ try:
     print("seeding the database...")
     db = SessionLocal()
 
- # Seed comments
+    # Seed users first (since programs reference users)
     db.add_all(user_list)
+    db.commit()
+    
+    # Seed programs
+    db.add_all(program_list)
     db.commit()
 
     db.close()
 
-    print("Database seeding complete! 👋")
+    print("Database seeding complete! ")
 except Exception as e:
     print("An error occurred:", e)
