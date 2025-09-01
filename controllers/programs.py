@@ -10,17 +10,22 @@ from serializers.program import ProgramSchema, ProgramCreateSchema
 router = APIRouter()
 
 @router.get('/programs',response_model=List[ProgramSchema])
-def get_programs(db: Session = Depends(get_db)):
-    programs = db.query(ProgramModel).all()
+def get_programs(db: Session = Depends(get_db), current_user: UserModel = Depends(get_current_user)):
+    programs = db.query(ProgramModel).filter(
+        (ProgramModel.user_id == None) | (ProgramModel.user_id == current_user.id)
+    ).all()
     return programs
 
 @router.get('/programs/{program_id}',response_model=ProgramSchema)
-def get_single_program(progra_id:int, db:Session = Depends(get_db)):
-    program = db.query(ProgramModel).filter(ProgramModel.id == progra_id).first()
-    if program:
-        return program
-    else:
+def get_single_program(program_id: int, db: Session = Depends(get_db), current_user: UserModel = Depends(get_current_user)):
+    program = db.query(ProgramModel).filter(ProgramModel.id == program_id).first()
+    if not program:
         raise HTTPException(status_code=404, detail="Program not found")
+    
+    if program.user_id is not None and program.user_id != current_user.id:
+        raise HTTPException(status_code=403, detail="You can only view your own programs or default programs")
+    
+    return program
     
 @router.post('/programs', response_model=ProgramSchema)
 def create_program(program: ProgramCreateSchema, db: Session = Depends(get_db), current_user: UserModel = Depends(get_current_user)):

@@ -58,6 +58,61 @@ def create_test_workouts():
         WorkoutModel(name="Rest Day", day_of_week=7, program_id=5),
     ])
     
+    # Workouts for Program 6: Arjun's Custom Split (program_id=6)
+    workouts.extend([
+        WorkoutModel(name="Chest & Triceps", day_of_week=1, program_id=6),
+        WorkoutModel(name="Back & Biceps", day_of_week=2, program_id=6),
+        WorkoutModel(name="Shoulders", day_of_week=3, program_id=6),
+        WorkoutModel(name="Legs", day_of_week=4, program_id=6),
+        WorkoutModel(name="Arms & Core", day_of_week=5, program_id=6),
+        WorkoutModel(name="Cardio", day_of_week=6, program_id=6),
+        WorkoutModel(name="Rest Day", day_of_week=7, program_id=6),
+    ])
+    
+    # Workouts for Program 7: Emma's Powerlifting (program_id=7)
+    workouts.extend([
+        WorkoutModel(name="Squat Day", day_of_week=1, program_id=7),
+        WorkoutModel(name="Bench Press Day", day_of_week=2, program_id=7),
+        WorkoutModel(name="Rest Day", day_of_week=3, program_id=7),
+        WorkoutModel(name="Deadlift Day", day_of_week=4, program_id=7),
+        WorkoutModel(name="Accessory Work", day_of_week=5, program_id=7),
+        WorkoutModel(name="Light Recovery", day_of_week=6, program_id=7),
+        WorkoutModel(name="Rest Day", day_of_week=7, program_id=7),
+    ])
+    
+    # Workouts for Program 8: Fatima's Bodybuilding (program_id=8)
+    workouts.extend([
+        WorkoutModel(name="Chest & Back", day_of_week=1, program_id=8),
+        WorkoutModel(name="Shoulders & Arms", day_of_week=2, program_id=8),
+        WorkoutModel(name="Legs & Glutes", day_of_week=3, program_id=8),
+        WorkoutModel(name="Push Focus", day_of_week=4, program_id=8),
+        WorkoutModel(name="Pull Focus", day_of_week=5, program_id=8),
+        WorkoutModel(name="Legs & Core", day_of_week=6, program_id=8),
+        WorkoutModel(name="Rest Day", day_of_week=7, program_id=8),
+    ])
+    
+    # Workouts for Program 9: Lucas's Crossfit (program_id=9)
+    workouts.extend([
+        WorkoutModel(name="WOD - Strength", day_of_week=1, program_id=9),
+        WorkoutModel(name="WOD - Metcon", day_of_week=2, program_id=9),
+        WorkoutModel(name="WOD - Gymnastics", day_of_week=3, program_id=9),
+        WorkoutModel(name="WOD - Heavy", day_of_week=4, program_id=9),
+        WorkoutModel(name="WOD - Endurance", day_of_week=5, program_id=9),
+        WorkoutModel(name="WOD - Partner", day_of_week=6, program_id=9),
+        WorkoutModel(name="Rest Day", day_of_week=7, program_id=9),
+    ])
+    
+    # Workouts for Program 10: Elena's Yoga Flow (program_id=10)
+    workouts.extend([
+        WorkoutModel(name="Morning Vinyasa", day_of_week=1, program_id=10),
+        WorkoutModel(name="Power Yoga", day_of_week=2, program_id=10),
+        WorkoutModel(name="Gentle Hatha", day_of_week=3, program_id=10),
+        WorkoutModel(name="Ashtanga Flow", day_of_week=4, program_id=10),
+        WorkoutModel(name="Yin Yoga", day_of_week=5, program_id=10),
+        WorkoutModel(name="Hot Yoga", day_of_week=6, program_id=10),
+        WorkoutModel(name="Meditation & Rest", day_of_week=7, program_id=10),
+    ])
+    
     return workouts
 
 workout_list = create_test_workouts()

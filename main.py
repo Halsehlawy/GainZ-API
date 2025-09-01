@@ -10,8 +10,8 @@ from models.program import ProgramModel
 from models.workout import WorkoutModel
 
 #Controllers
-from controllers.programs import router as ProgramsRouter
 from controllers.users import router as UsersRouter
+from controllers.programs import router as ProgramsRouter
 from controllers.workouts import router as WorkoutsRouter
 app = FastAPI()
 
@@ -32,8 +32,8 @@ app.add_middleware(
     # so we are not setting allow_credentials.
 )
 
-app.include_router(ProgramsRouter, prefix='/api')
 app.include_router(UsersRouter, prefix='/api')
+app.include_router(ProgramsRouter, prefix='/api')
 app.include_router(WorkoutsRouter, prefix='/api')
 
 # Health check endpoint
