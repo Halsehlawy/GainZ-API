@@ -15,5 +15,6 @@ class ProgramModel(BaseModel):
     
     #Relationships
     user = relationship('UserModel', back_populates='programs')
+    workouts = relationship('WorkoutModel', back_populates='program', cascade='all, delete-orphan')
     
     

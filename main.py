@@ -4,9 +4,15 @@ load_dotenv()
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+#Models
+from models.user import UserModel
+from models.program import ProgramModel
+from models.workout import WorkoutModel
 
+#Controllers
 from controllers.programs import router as ProgramsRouter
 from controllers.users import router as UsersRouter
+from controllers.workouts import router as WorkoutsRouter
 app = FastAPI()
 
 # ✅ Allow your React dev server(s) to call the API
@@ -28,6 +34,7 @@ app.add_middleware(
 
 app.include_router(ProgramsRouter, prefix='/api')
 app.include_router(UsersRouter, prefix='/api')
+app.include_router(WorkoutsRouter, prefix='/api')
 
 # Health check endpoint
 @app.get("/health")

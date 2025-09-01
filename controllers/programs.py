@@ -51,10 +51,13 @@ def update_program(program_id: int, program: ProgramCreateSchema, db: Session = 
 @router.delete("/programs/{program_id}")
 def delete_program(program_id:int, db: Session = Depends(get_db), current_user: UserModel = Depends(get_current_user)):
     db_program = db.query(ProgramModel).filter(ProgramModel.id == program_id).first()
+    
     if not db_program:
         raise HTTPException(status_code=404, detail="Program not found")
+    
     if db_program.user_id != current_user.id:
-      raise HTTPException(status_code=403, detail="Operation forbidden")
-    db.delete(program_id)
+        raise HTTPException(status_code=403, detail="Operation forbidden")
+    
+    db.delete(db_program)
     db.commit()
-    return{"message": f"Program {program_id} has been deleted"}
+    return {"message": f"Program {program_id} has been deleted"}

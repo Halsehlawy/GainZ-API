@@ -7,9 +7,11 @@ from models.base import Base
 # Import all models first to ensure they're registered
 from models.user import UserModel
 from models.program import ProgramModel
+from models.workout import WorkoutModel
 # Then import the data
 from data.user_data import user_list
 from data.program_data import program_list
+from data.workout_data import workout_list
 
 engine = create_engine(db_URI)
 SessionLocal = sessionmaker(bind=engine)
@@ -29,8 +31,12 @@ try:
     db.add_all(user_list)
     db.commit()
     
-    # Seed programs
+    # Seed programs (since workouts reference programs)
     db.add_all(program_list)
+    db.commit()
+    
+    # Seed workouts
+    db.add_all(workout_list)
     db.commit()
 
     db.close()
