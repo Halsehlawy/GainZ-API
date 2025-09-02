@@ -8,10 +8,12 @@ from models.base import Base
 from models.user import UserModel
 from models.program import ProgramModel
 from models.workout import WorkoutModel
+from models.exercise import ExerciseModel
 # Then import the data
 from data.user_data import user_list
 from data.program_data import program_list
 from data.workout_data import workout_list
+from data.exercise_data import exercise_data
 
 engine = create_engine(db_URI)
 SessionLocal = sessionmaker(bind=engine)
@@ -35,8 +37,13 @@ try:
     db.add_all(program_list)
     db.commit()
     
-    # Seed workouts
+    # Seed workouts (since exercises reference workouts)
     db.add_all(workout_list)
+    db.commit()
+    
+    # Seed exercises
+    exercise_objects = [ExerciseModel(**exercise) for exercise in exercise_data]
+    db.add_all(exercise_objects)
     db.commit()
 
     db.close()
