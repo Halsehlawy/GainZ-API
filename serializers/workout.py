@@ -1,10 +1,11 @@
 from pydantic import BaseModel, Field
-from typing import Optional
+from typing import Optional, List
 
 class WorkoutSchema(BaseModel):
     id: Optional[int] = Field(default=None)
     name: str
     day_of_week: int = Field(..., ge=1, le=7)
+    exercise_ids: List[int] = Field(default=[])
     program_id: int
     
     class Config:
@@ -13,8 +14,10 @@ class WorkoutSchema(BaseModel):
 class WorkoutCreateSchema(BaseModel):
     name: str
     day_of_week: int = Field(..., ge=1, le=7)
+    exercise_ids: List[int] = Field(default=[])
     program_id: int
 
 class WorkoutUpdateSchema(BaseModel):
     name: Optional[str] = None
     day_of_week: Optional[int] = Field(None, ge=1, le=7)
+    exercise_ids: Optional[List[int]] = None

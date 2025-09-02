@@ -3,13 +3,16 @@ from sqlalchemy.orm import Session
 from models.workout import WorkoutModel
 from models.program import ProgramModel
 from models.user import UserModel
+from models.exercise import ExerciseModel
 from typing import List
 from database import get_db
 from dependencies.get_current_user import get_current_user
 from serializers.workout import WorkoutSchema, WorkoutCreateSchema, WorkoutUpdateSchema
+from serializers.exercise import ExerciseSchema
 
 router = APIRouter()
 
+# Get all workouts for a specific program
 @router.get('/programs/{program_id}/workouts', response_model=List[WorkoutSchema])
 def get_workouts_by_program(program_id: int, db: Session = Depends(get_db), current_user: UserModel = Depends(get_current_user)):
     program = db.query(ProgramModel).filter(ProgramModel.id == program_id).first()
@@ -22,6 +25,7 @@ def get_workouts_by_program(program_id: int, db: Session = Depends(get_db), curr
     workouts = db.query(WorkoutModel).filter(WorkoutModel.program_id == program_id).order_by(WorkoutModel.day_of_week).all()
     return workouts
 
+# Get a single workout for a specific program
 @router.get('/programs/{program_id}/workouts/{workout_id}', response_model=WorkoutSchema)
 def get_single_workout(program_id: int, workout_id: int, db: Session = Depends(get_db), current_user: UserModel = Depends(get_current_user)):
     program = db.query(ProgramModel).filter(ProgramModel.id == program_id).first()
@@ -41,6 +45,7 @@ def get_single_workout(program_id: int, workout_id: int, db: Session = Depends(g
     
     return workout
 
+# Create a workout in a program
 @router.post('/programs/{program_id}/workouts', response_model=WorkoutSchema)
 def create_workout(program_id: int, workout: WorkoutCreateSchema, db: Session = Depends(get_db), current_user: UserModel = Depends(get_current_user)):
     program = db.query(ProgramModel).filter(ProgramModel.id == program_id).first()
@@ -66,6 +71,7 @@ def create_workout(program_id: int, workout: WorkoutCreateSchema, db: Session = 
     db.refresh(new_workout)
     return new_workout
 
+# update a workout in a program
 @router.put("/programs/{program_id}/workouts/{workout_id}", response_model=WorkoutSchema)
 def update_workout(program_id: int, workout_id: int, workout: WorkoutUpdateSchema, db: Session = Depends(get_db), current_user: UserModel = Depends(get_current_user)):
     program = db.query(ProgramModel).filter(ProgramModel.id == program_id).first()
@@ -101,6 +107,7 @@ def update_workout(program_id: int, workout_id: int, workout: WorkoutUpdateSchem
     db.refresh(db_workout)
     return db_workout
 
+# Delete a workout from a program
 @router.delete("/programs/{program_id}/workouts/{workout_id}")
 def delete_workout(program_id: int, workout_id: int, db: Session = Depends(get_db), current_user: UserModel = Depends(get_current_user)):
     program = db.query(ProgramModel).filter(ProgramModel.id == program_id).first()
