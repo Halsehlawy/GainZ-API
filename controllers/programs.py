@@ -32,7 +32,11 @@ def get_single_program(program_id: int, db: Session = Depends(get_db), current_u
 # create a program
 @router.post('/programs', response_model=ProgramSchema)
 def create_program(program: ProgramCreateSchema, db: Session = Depends(get_db), current_user: UserModel = Depends(get_current_user)):
-    new_program = ProgramModel(**program.dict(), user_id = current_user.id)
+    new_program = ProgramModel(
+        name=program.name,
+        is_default=False, 
+        user_id=current_user.id
+    )
     db.add(new_program)
     db.commit()
     db.refresh(new_program)

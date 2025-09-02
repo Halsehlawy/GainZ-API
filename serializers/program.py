@@ -13,5 +13,5 @@ class ProgramSchema(BaseModel):
         orm_mode = True
         
 class ProgramCreateSchema(BaseModel):
-    name:str
-    is_default: bool
+    name: str
+    is_default: bool = False
