@@ -14,13 +14,13 @@ router = APIRouter()
 
 # Get all exercises
 @router.get('/exercises', response_model=List[ExerciseSchema])
-def get_all_exercises(db: Session = Depends(get_db), current_user: UserModel = Depends(get_current_user)):
+def get_all_exercises(db: Session = Depends(get_db)):
     exercises = db.query(ExerciseModel).all()
     return exercises
 
 # Get signle exercise
 @router.get('/exercises/{exercise_id}', response_model=ExerciseSchema)
-def get_single_exercise(exercise_id: int, db: Session = Depends(get_db), current_user: UserModel = Depends(get_current_user)):
+def get_single_exercise(exercise_id: int, db: Session = Depends(get_db)):
     exercise = db.query(ExerciseModel).filter(ExerciseModel.id == exercise_id).first()
     if not exercise:
         raise HTTPException(status_code=404, detail="Exercise not found")

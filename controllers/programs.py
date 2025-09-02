@@ -39,7 +39,7 @@ def create_program(program: ProgramCreateSchema, db: Session = Depends(get_db), 
     return new_program
 
 # update program
-@router.put("/program/{program_id}", response_model=ProgramSchema)
+@router.put("/programs/{program_id}", response_model=ProgramSchema)
 def update_program(program_id: int, program: ProgramCreateSchema, db: Session = Depends(get_db), current_user: UserModel = Depends(get_current_user)):
     db_program = db.query(ProgramModel).filter(ProgramModel.id==program_id).first()
     

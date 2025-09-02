@@ -19,8 +19,8 @@ app = FastAPI()
 
 # ✅ Allow your React dev server(s) to call the API
 origins = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
     # Later, add your deployed frontend origin, e.g.:
     # "https://your-frontend.example.com"
 ]
