@@ -8,11 +8,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from models.user import UserModel
 from models.program import ProgramModel
 from models.workout import WorkoutModel
+from models.exercise import ExerciseModel
 
 #Controllers
 from controllers.users import router as UsersRouter
 from controllers.programs import router as ProgramsRouter
 from controllers.workouts import router as WorkoutsRouter
+from controllers.exercises import router as ExercisesRouter
 app = FastAPI()
 
 # ✅ Allow your React dev server(s) to call the API
@@ -35,6 +37,7 @@ app.add_middleware(
 app.include_router(UsersRouter, prefix='/api')
 app.include_router(ProgramsRouter, prefix='/api')
 app.include_router(WorkoutsRouter, prefix='/api')
+app.include_router(ExercisesRouter, prefix='/api')
 
 # Health check endpoint
 @app.get("/health")
