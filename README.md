@@ -2,7 +2,7 @@
 
 #  GainZ
 
-![Game Screenshot](<img width="1855" height="968" alt="image" src="https://github.com/user-attachments/assets/825e48c7-29c7-4ff3-a410-6cdcf8983844" />)
+<img width="1855" height="968" alt="image" src="https://github.com/user-attachments/assets/825e48c7-29c7-4ff3-a410-6cdcf8983844" />
 
 ## 🕹️ Description
 
