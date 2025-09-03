@@ -4,4 +4,9 @@
 
 ## 🕹️ Description
 
-**GainZ** is a web application that can help you choose a gym program, where users can choose predefined programs that they can easily follow, or create their own programs, add workouts or restdays, and add exercises within their workouts!
+**GainZ** is a full-stack workout tracking application that allows users to create, manage, and follow personalized fitness programs. Users can build weekly workout schedules, populate them with exercises, and track their fitness journey.
+**Tech Stack**
+- FastAPI
+- React
+- PostgreSQL
+- 
