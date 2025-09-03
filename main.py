@@ -1,3 +1,4 @@
+import os
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -16,6 +17,12 @@ from controllers.programs import router as ProgramsRouter
 from controllers.workouts import router as WorkoutsRouter
 from controllers.exercises import router as ExercisesRouter
 app = FastAPI()
+
+
+if os.getenv("APP_ENV", "development") != "production":
+    # load .env only locally
+    from dotenv import load_dotenv
+    load_dotenv()
 
 # ✅ Allow your React dev server(s) to call the API
 origins = [

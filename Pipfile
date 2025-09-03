@@ -14,6 +14,8 @@ bcrypt = "*"
 pyjwt = "*"
 python-dotenv = "*"
 alembic = "*"
+gunicorn = "*"
+uvicorn-worker = "*"
 
 [dev-packages]
 pytest = "*"
